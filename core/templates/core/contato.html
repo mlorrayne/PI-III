@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contato | ONG ALMEM{% endblock %}
+
+{% block content %}
+<div class="sessao_conteudo">
+    <h2>ENTRE EM CONTATO</h2>
+
+    <p><strong>Endereço:</strong> Av. Roland Garros, 1065 - Jardim Brasil</p>
+
+    <p>
+        <strong>Facebook:</strong><br>
+        <a href="https://www.facebook.com/associacaomoradia/?hc_ref=ARQ8tYCqMxHGrDLE8Lu_qK0N4NjnBkR9vMKIsrTIkTjPYMqibt1SespddaV5qoBjtjw" 
+           target="_blank" rel="noopener noreferrer">
+           facebook.com/associacaomoradia
+        </a>
+    </p>
+
+    <a href="{% url 'index' %}">← Voltar para a página inicial</a>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+<header class="top-nav">
+  <nav>
+    <ul>
+      <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Início</a></li>
+      <li><a href="{% url 'historia' %}" class="{% if request.resolver_match.url_name == 'historia' %}active{% endif %}">História</a></li>
+      <li><a href="{% url 'contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="sessao_conteudo">
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  Associação de Luta por Moradia Estrela da Manhã / SP
+</footer>

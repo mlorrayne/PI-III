@@ -1,23 +1,90 @@
-body { 
+/* Reset básico */
+* {
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
     padding: 2px;
     margin: 2px;
-    min-height: 100%;
+    min-height: 100vh;
     background-color: rgb(129, 192, 235);
+    font-family: Arial, sans-serif;
+    color: #000;
 }
 
-.sessao_conteudo {
-    text-align: center;
-    width: 90%;
-    height: 90%;
-}
-
-#sessao_conteudo {
-    font-size: 25px;
-    background-color: rgb(103, 143, 216);
+/* Menu fixo no topo */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
+    background-color: rgb(103, 143, 216);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    z-index: 1000;
 }
 
+.top-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.top-nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.top-nav ul li a:hover,
+.top-nav ul li a:focus {
+    background-color: rgb(81, 114, 172);
+}
+
+.top-nav ul li a.active {
+    background-color: rgb(81, 114, 172);
+    color: #fff;
+}
+
+/* Espaçamento para o conteúdo não ficar atrás do menu e rodapé fixos */
+#sessao_conteudo {
+    margin-top: 70px;   /* espaço para menu fixo */
+    margin-bottom: 60px; /* espaço para rodapé fixo */
+    font-size: 20px;
+    background-color: rgb(103, 143, 216);
+    width: 90%;
+    max-width: 900px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: #000;
+    text-align: center;
+}
+
+.sessao_conteudo p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.sessao_conteudo a {
+    color: rgb(10, 70, 120);
+    text-decoration: none;
+}
+
+.sessao_conteudo a:hover,
+.sessao_conteudo a:focus {
+    text-decoration: underline;
+}
+
+/* Rodapé fixo */
 footer {
     position: fixed;
     bottom: 0;
@@ -25,36 +92,41 @@ footer {
     color: black;
     width: 100%;
     height: 40px;
-    text-align: left;
+    text-align: center;
     line-height: 40px;
-    font-size: large;
+    font-size: 18px;
+    font-weight: bold;
+    z-index: 1000;
 }
 
-p {
-    color: rgb(12, 11, 11);
-    font-size: xx-large;
-}
-
+/* Imagem símbolo */
 .posrelativa-simbolo {
-    position: fixed;
-    top: 300px;
-    left: 15%;
+    position: relative;
+    margin: 20px auto;
     width: 80%;
+    max-width: 600px;
     height: auto;
 }
 
-.menu {
-    list-style: none;
-    text-align: center;
-    padding: 0;
-}
+/* Responsividade */
+@media (max-width: 600px) {
+    #sessao_conteudo {
+        width: 95%;
+        font-size: 16px;
+        margin: 100px 10px 60px 10px;
+    }
 
-.menu li {
-    margin: 10px 0;
-}
+    .top-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
 
-.menu a {
-    text-decoration: none;
-    font-weight: bold;
-    color: black;
+    .top-nav ul li a {
+        font-size: 16px;
+        padding: 8px 0;
+    }
+
+    footer {
+        font-size: 14px;
+    }
 }
