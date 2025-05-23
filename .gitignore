@@ -1,0 +1,38 @@
+# Ambiente virtual
+venv/
+.env/
+
+# Arquivos do Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.sqlite3
+
+# Django stuff
+db.sqlite3
+/media/
+staticfiles/
+*.log
+
+# PostgreSQL dump files
+*.pgsql
+*.psql
+*.sql
+
+# Configurações de IDEs e editores
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Node.js (se usar JS com npm futuramente)
+node_modules/
+
+# Arquivos de migração com conflitos
+*.~*
+
+# Outros
+*.bak

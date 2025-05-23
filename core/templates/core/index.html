@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG ALMEM</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div id="sessao_conteudo">
+        <div class="sessao_conteudo">
+            <h2>ASSOCIAÇÃO DE LUTA POR MORADIA ESTRELA DA MANHÃ</h2>
+            <p>Conheça um pouco da nossa história</p>
+        </div>
+
+        <nav>
+            <ul class="menu">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'historias' %}">Nossa história</a></li>
+                <li><a href="{% url 'contato' %}">Parcerias</a></li>
+                <li><a href="{% url 'cadastro' %}">Apoio</a></li>
+                <li><a href="{% url 'contato' %}">Contatos</a></li>
+            </ul>
+        </nav>
+
+        <div class="posrelativa-simbolo">
+            <img src="{% static 'images/Simbolo.JPG' %}" alt="Símbolo da ONG" style="width: 100%; height: auto;">
+        </div>
+    </div>
+
+    <footer>
+        Associação de Luta por Moradia Estrela da Manhã / SP
+    </footer>
+
+    <!-- JS opcional -->
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+
+</body>
+</html>
