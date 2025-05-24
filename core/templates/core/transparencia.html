@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>Transparência | ONG ALMEM</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Biblioteca do gráfico -->
+    <style>
+        .btn-voltar, .btn-editar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 10px;
+            font-size: 14px;
+            background-color: rgb(97, 128, 233);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: normal;
+            transition: 0.3s ease;
+        }
+
+        .btn-voltar:hover, .btn-editar:hover {
+            background-color: rgb(76, 110, 207);
+        }
+
+        /* Estiliza o gráfico */
+        .grafico-container {
+            display: flex;
+            justify-content: center; /* Para centralizar, use 'center'. Para alinhar à esquerda, troque por 'flex-start' */
+            align-items: center;
+            margin: 20px auto;
+            max-width: 500px; /* Define uma largura menor para evitar que ocupe toda a tela */
+        }
+    </style>
+</head>
+<body>
+    <h2>Transparência Financeira</h2>
+
+    <!-- Valores recebidos -->
+    <p><strong>Ano anterior:</strong> R$ {{ ano_anterior }}</p>
+    <p><strong>Ano atual:</strong> R$ {{ ano_atual }}</p>
+
+    <!-- Relatório de Gastos -->
+    <h3>Relatório de Gastos</h3>
+    <ul>
+        {% for gasto in relatorio_gastos %}
+            <li><strong>{{ gasto.item }}:</strong> R$ {{ gasto.valor }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Meta de Doações -->
+    <h3>Meta de Doações</h3>
+    <p>Meta anual: R$ {{ meta_doacoes }}</p>
+    <p>Valor arrecadado: R$ {{ ano_atual }}</p>
+    
+    <!-- Gráfico de progresso dentro do contêiner -->
+    <div class="grafico-container">
+        <canvas id="graficoDoacoes" width="350" height="150"></canvas>
+    </div>
+
+    <script>
+        var ctx = document.getElementById('graficoDoacoes').getContext('2d');
+        var graficoDoacoes = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Meta', 'Arrecadado'],
+                datasets: [{
+                    label: 'Doações',
+                    data: [{{ meta_doacoes }}, {{ ano_atual }}],
+                    backgroundColor: ['rgb(76, 110, 207)', '#c92b2b'],
+                    borderColor: ['rgb(76, 110, 207)', '#c92b2b'],
+                    borderWidth: 1,
+                    categoryPercentage: 0.6, 
+                    barPercentage: 0.4 
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: {{ meta_doacoes }} 
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!-- Botão de voltar -->
+    <a href="{% url 'index' %}" class="btn-voltar">Voltar para a página inicial</a>
+
+    <!-- Botão de edição visível apenas para usuários logados -->
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'editar_transparencia' %}" class="btn-editar">Editar Valores</a>
+    {% endif %}
+</body>
+</html>

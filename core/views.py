@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
-from .models import Voluntariado, Apoio
+from .models import Voluntariado, Apoio, Transparencia, Gasto
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
 from .forms import ApoioForm, VoluntariadoForm
 
@@ -97,3 +98,38 @@ def excluir_apoio(request, pk):
         apoio.delete()
         return redirect('lista_apoios')
     return render(request, 'core/confirma_exclusao.html', {'obj': apoio, 'tipo': 'Apoio'})
+
+def transparencia(request):
+    transparencia, created = Transparencia.objects.get_or_create(id=1)
+    relatorio_gastos = Gasto.objects.all()
+
+    return render(request, "core/transparencia.html", {
+        "ano_anterior": transparencia.ano_anterior,
+        "ano_atual": transparencia.ano_atual,
+        "meta_doacoes": transparencia.meta_doacoes,
+        "relatorio_gastos": relatorio_gastos
+    })
+
+@login_required
+def editar_transparencia(request):
+    transparencia = Transparencia.objects.get(id=1)
+    relatorio_gastos = Gasto.objects.all()
+
+    if request.method == "POST":
+        transparencia.ano_anterior = request.POST.get("ano_anterior")
+        transparencia.ano_atual = request.POST.get("ano_atual")
+        transparencia.meta_doacoes = request.POST.get("meta_doacoes")
+        transparencia.save()
+
+        for gasto in relatorio_gastos:
+            gasto.valor = request.POST.get(f"gasto_{gasto.id}")
+            gasto.save()
+
+        return redirect("transparencia")
+    
+    return render(request, "core/editar_transparencia.html", {
+        "transparencia": transparencia,
+        "relatorio_gastos": relatorio_gastos
+    })
+
+

@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block title %}Editar Transparência | ONG ALMEM{% endblock %}
+{% block content %}
+<h2>Editar Transparência Financeira</h2>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <label for="ano_anterior">Valor recebido no ano anterior:</label>
+    <input type="number" id="ano_anterior" name="ano_anterior" value="{{ transparencia.ano_anterior }}" required>
+
+    <label for="ano_atual">Valor recebido neste ano:</label>
+    <input type="number" id="ano_atual" name="ano_atual" value="{{ transparencia.ano_atual }}" required>
+
+    <label for="meta_doacoes">Meta de doações anual:</label>
+    <input type="number" id="meta_doacoes" name="meta_doacoes" value="{{ transparencia.meta_doacoes }}" required>
+
+    <!-- Relatório de Gastos -->
+    <h3>Relatório de Gastos</h3>
+    {% for gasto in relatorio_gastos %}
+        <label for="gasto_{{ gasto.id }}">{{ gasto.item }}</label>
+        <input type="number" id="gasto_{{ gasto.id }}" name="gasto_{{ gasto.id }}" value="{{ gasto.valor }}" required>
+    {% endfor %}
+
+    <button type="submit">Salvar Alterações</button>
+</form>
+
+<a href="{% url 'transparencia' %}">Voltar</a>
+{% endblock %}

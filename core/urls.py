@@ -10,16 +10,18 @@ urlpatterns = [
     path('voluntariado/', views.voluntariado, name='voluntariado'),
     path('voluntariado/sucesso/', views.voluntariado_sucesso, name='voluntariado_sucesso'),
     path('apoio/agradecimento/', views.apoio_agradecimento, name='apoio_agradecimento'),
+    path("transparencia/", views.transparencia, name="transparencia"),
 
-    # URLs para listagem dos formulários — sem 'admin/' no caminho
+    # URLs para listagem dos formulários 
     path('voluntariados/', views.lista_voluntariados, name='lista_voluntariados'),
     path('apoios/', views.lista_apoios, name='lista_apoios'),
 
-    # URLs para editar e excluir registros — também sem 'admin/'
+    # URLs para editar e excluir registros 
     path('apoios/editar/<int:pk>/', views.editar_apoio, name='editar_apoio'),
     path('voluntariados/editar/<int:pk>/', views.editar_voluntariado, name='editar_voluntariado'),
     path('apoios/excluir/<int:pk>/', views.excluir_apoio, name='excluir_apoio'),
     path('voluntariados/excluir/<int:pk>/', views.excluir_voluntariado, name='excluir_voluntariado'),
+    path("transparencia/editar/", views.editar_transparencia, name="editar_transparencia"),
 
     # Login e logout
     path('login/', auth_views.LoginView.as_view(template_name='core/login.html'), name='login'),
