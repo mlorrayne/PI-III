@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import Voluntariado, Apoio
+from django.core.paginator import Paginator
+
 from .forms import ApoioForm, VoluntariadoForm
 
 def index(request):
@@ -40,13 +42,19 @@ def apoio_agradecimento(request):
 
 @staff_member_required
 def lista_voluntariados(request):
-    voluntariados = Voluntariado.objects.all()
-    return render(request, 'core/lista_voluntariados.html', {'voluntariados': voluntariados})
+    voluntarios_list = Voluntariado.objects.order_by("nome")
+    paginator = Paginator(voluntarios_list, 15)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'core/lista_voluntariados.html', {"page_obj": page_obj})
 
 @staff_member_required
 def lista_apoios(request):
-    apoios = Apoio.objects.all()
-    return render(request, 'core/lista_apoios.html', {'apoios': apoios})
+    apoios_list = Apoio.objects.order_by("nome")
+    paginator = Paginator(apoios_list, 15)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'core/lista_apoios.html', {"page_obj": page_obj})
 
 @staff_member_required
 def editar_voluntariado(request, pk):

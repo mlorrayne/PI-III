@@ -117,13 +117,14 @@ input, select, textarea {
 
 	.form-control {
     	width: 600px;
-    	padding: 8px;
+    	padding: 2px;
     	border: 1px solid #ccc;
+		height: 30px;
     	border-radius: 4px;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #590b70;
+		color: rgb(97, 128, 233);
 		margin: 0 0 1em 0;
 		font-weight: 700;
 		line-height: 1.5em;
@@ -140,7 +141,7 @@ input, select, textarea {
 
 	strong, b {
 		font-weight: 400;
-		color: inherit;
+		color: rgb(97, 128, 233);
 	}
 
 	.dark strong, .dark b {
@@ -236,7 +237,7 @@ input, select, textarea {
 	}
 
 	p {
-		text-align: justify;
+		text-align: center;
 	}
 
 	header {
@@ -1559,9 +1560,12 @@ input, select, textarea {
 /* Image */
 
 	.image {
-		position: relative;
-		display: inline-block;
-		border: 0;
+    	position: relative;
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+    	width: 100%;
+    	height: 100vh; /* Altura da tela */
 	}
 
 		.image:after {
@@ -1576,8 +1580,9 @@ input, select, textarea {
 
 		.image img {
 			display: block;
-			width: 100%;
-			border-radius: 0.5em;
+    		max-width: 80%; /* Ajuste conforme necessário */
+    		height: auto; /* Mantém a proporção original */
+    		border-radius: 0.5em;
 		}
 
 		.image.featured {
@@ -1822,12 +1827,21 @@ input, select, textarea {
 
 /* Form */
 
+	form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
 	form .actions {
 		margin-bottom: 0;
 	}
 
 	form label {
 		display: block;
+		text-align: center;
 	}
 
 	form input[type="text"],
@@ -1862,17 +1876,22 @@ input, select, textarea {
 			outline: 0;
 			box-shadow: inset 0 0 0 1px #afd9e0;
 			background: #fcfcfc;
+			width: 220px;
+			padding: 0.7em 1em;
+			margin-bottom: 10px;
 		}
 
 	form input[type="text"],
 	form input[type="email"],
 	form input[type="password"],
 	form select {
-		line-height: 1.25em;
+		line-height: 1.0em;
+		width: 250px;
 	}
 
 	form textarea {
-		min-height: 13em;
+		min-height: 10em;
+		width: 250px;
 	}
 
 	form select {
@@ -1998,14 +2017,15 @@ input, select, textarea {
 		}
 
 			table.default tbody tr {
-				border: solid 1px #e6e6e6;
+				border: solid 2px #501d55;
 			}
 
 				table.default tbody tr:nth-child(2n+2) {
-					background: #f8f8f8;
+					background: #f6f3f7;
 				}
 
 			table.default td {
+				text-align: left;
 				padding: 0.5em 1em 0.5em 1em;
 			}
 
@@ -2019,7 +2039,7 @@ input, select, textarea {
 			}
 
 	.dark table.default tbody tr {
-		border-color: rgba(255, 255, 255, 0.5);
+		border-color: rgba(114, 41, 156, 0.5);
 	}
 
 		.dark table.default tbody tr:nth-child(2n+2) {
@@ -2040,7 +2060,7 @@ input, select, textarea {
 		-webkit-appearance: none;
 		position: relative;
 		display: inline-block;
-		background: #3d3d3d;
+		background: rgb(97, 128, 233);
 		padding: 0.85em 3em 0.85em 3em;
 		border-radius: 0.25em;
 		cursor: pointer;
@@ -2206,21 +2226,31 @@ input, select, textarea {
 /* Header */
 
 	#header {
-		position: relative;
-		margin: 0;
-		background-image: url("../images/overlay.png"), url("../core/images/Simbolo.JPG");
-		background-size: auto, cover;
-		background-position: top left, center center;
-		background-repeat: repeat, no-repeat;
-		padding: 14em 0 14em 0;
-		text-align: center;
-		color: #fff;
+		background-image: url("/static/images/overlay.png"), url("/static/core/images/Simbolo.JPG");
+    	background-size: cover;
+    	background-position: center;
+    	background-repeat: no-repeat;
+    	height: 400px;
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    	color: white;
+    	text-align: center;
 	}
 
+		.container {
+    		display: flex;
+    		flex-direction: column;
+    		align-items: center; 
+    		justify-content: center;
+		}
+
 		#header header h1 {
+			margin-top: 16em;
 			font-size: 2.25em;
 			line-height: 1.25em;
 			margin-bottom: 0;
+			margin-top: 30px;
 		}
 
 		#header header p {
@@ -2233,14 +2263,16 @@ input, select, textarea {
 		}
 
 		#header footer {
-			padding-top: 1.5em;
+			padding-top: 16em;
 		}
 
 /* Main Sections */
 
 	.main {
-		position: relative;
-		margin: 0;
+		margin-top: 420px; 
+    	padding: 2em;
+    	background: rgba(255, 255, 255, 0.9); 
+    	border-radius: 10px;
 	}
 
 		.main > header {

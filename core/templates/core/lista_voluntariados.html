@@ -1,31 +1,74 @@
-{% extends "core/base.html" %}
-{% block title %}Lista de Voluntários | ONG ALMEM{% endblock %}
-{% block content %}
-<h2>Lista de Voluntários</h2>
+{% load static %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Lista de Voluntários | ONG ALMEM</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <style>
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 6px 10px;
+            font-size: 14px;
+            background-color: rgb(97, 128, 233);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: normal;
+            transition: 0.3s ease;
+        }
+        
+        .btn-voltar:hover {
+            background-color: rgb(97, 128, 233);
+        }
+    </style>
+</head>
+<body>
+    <h2>Lista de Voluntários</h2>
 
-<table class="custom-table">
-    <thead>
-         <tr>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for v in voluntariados %}
-        <tr>
-            <td>{{ v.nome }}</td>
-            <td>{{ v.email }}</td>
-            <td>{{ v.telefone }}</td>
-            <td>
-                <a href="{% url 'editar_voluntariado' v.pk %}">Editar</a> |
-                <a href="{% url 'excluir_voluntariado' v.pk %}">Excluir</a>
-            </td>
-        </tr>
-        {% empty %}
+    <table class="default">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for voluntario in page_obj %}
+            <tr>
+                <td>{{ voluntario.nome }}</td>
+                <td>{{ voluntario.email }}</td>
+                <td>{{ voluntario.telefone }}</td>
+                <td>
+                    <a href="{% url 'editar_voluntariado' voluntario.pk %}">Editar</a> |
+                    <a href="{% url 'excluir_voluntariado' voluntario.pk %}">Excluir</a>
+                </td>
+            </tr>
+            {% empty %}
             <tr><td colspan="4">Nenhum voluntário encontrado.</td></tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">Primeira</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+        {% endif %}
+
+        <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Última</a>
+        {% endif %}
+    </div>
+
+    <!-- Botão de voltar -->
+    <a href="{% url 'index' %}" class="btn-voltar">Voltar para a página inicial</a>
+</body>
+</html>
