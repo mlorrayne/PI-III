@@ -1,0 +1,13 @@
+{% extends "core/base.html" %}
+{% block title %}Voluntariado | ONG ALMEM{% endblock %}
+
+{% block content %}
+<h2>Seja um Voluntário</h2>
+<p>Quer colaborar conosco? Preencha o formulário abaixo para se candidatar.</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}

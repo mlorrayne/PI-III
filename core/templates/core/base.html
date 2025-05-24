@@ -8,7 +8,7 @@
     <noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}" /></noscript>
     <style>
     body {
-        background-image: url("{% static 'core/images/Simbolo.jpg' %}");
+        background-image: url("{% static 'core/img/header.jpg' %}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -19,14 +19,30 @@
 <body class="is-preload">
     <!-- Header -->
     <header id="header">
-        <h1><a href="{% url 'index' %}">ONG ALMEM</a></h1>
+        <h1 style="font-weight: bold; font-size: 2.5em; color:rgb(82, 62, 107);">
+            <a href="{% url 'index' %}">ALMEM - Associação Luta por Moradia Estrela da Manhã</a>
+        </h1>
         <nav>
             <ul>
-                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Início</a></li>
-                <li><a href="{% url 'historia' %}" class="{% if request.resolver_match.url_name == 'historia' %}active{% endif %}">História</a></li>
-                <li><a href="{% url 'contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">Contato</a></li>
+                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'historia' %}" class="{% if request.resolver_match.url_name == 'historia' %}active{% endif %}">Nossa História</a></li>
+                <li><a href="{% url 'contato' %}" class="{% if request.resolver_match.url_name == 'contato' %}active{% endif %}">Contatos</a></li>
+                <li><a href="{% url 'apoio' %}" class="{% if request.resolver_match.url_name == 'apoio' %}active{% endif %}">Apoio</a></li>
+                <li><a href="{% url 'voluntariado' %}" class="{% if request.resolver_match.url_name == 'voluntariado' %}active{% endif %}">Seja Voluntário</a></li>
+
+                {% if request.user.is_staff %}
+                    <li><a href="{% url 'lista_voluntariados' %}" class="{% if request.resolver_match.url_name == 'lista_voluntariados' %}active{% endif %}">Voluntariados</a></li>
+                    <li><a href="{% url 'lista_apoios' %}" class="{% if request.resolver_match.url_name == 'lista_apoios' %}active{% endif %}">Formulários de Apoio</a></li>
+                {% endif %}
             </ul>
         </nav>
+        <div>
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'logout' %}" style="color: #590b70; font-weight: bold;">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}" style="color: #590b70; font-weight: bold;">Login</a>
+            {% endif %}
+        </div>
     </header>
 
     <!-- Main -->

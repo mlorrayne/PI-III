@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+{% block title %}Formulários de Apoio{% endblock %}
+{% block content %}
+<h2>Formulários de Apoio</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Mensagem</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in apoios %}
+        <tr>
+            <td>{{ a.nome }}</td>
+            <td>{{ a.email }}</td>
+            <td>{{ a.mensagem }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="3">Nenhum formulário de apoio recebido.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

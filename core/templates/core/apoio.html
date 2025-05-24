@@ -1,0 +1,33 @@
+{% extends "core/base.html" %}
+{% load custom_tags %}
+
+{% block title %}Apoio | ONG ALMEM{% endblock %}
+
+{% block content %}
+<h2>Formas de Apoio</h2>
+<p>Você pode ajudar de várias formas: doações, parcerias, divulgação e muito mais.</p>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <p>
+        {{ form.nome.label_tag }}<br>
+        {{ form.nome|add_attr:"style=width:600px;padding:8px;border:1px solid #ccc;border-radius:4px;" }}
+        {{ form.nome.errors }}
+    </p>
+    
+    <p>
+        {{ form.email.label_tag }}<br>
+        {{ form.email|add_attr:"style=width:600px;padding:8px;border:1px solid #ccc;border-radius:4px;" }}
+        {{ form.email.errors }}
+    </p>
+    
+    <p>
+        {{ form.mensagem.label_tag }}<br>
+        {{ form.mensagem|add_attr:"style=width:600px;height:100px;padding:8px;border:1px solid #ccc;border-radius:4px;" }}
+        {{ form.mensagem.errors }}
+    </p>
+    
+    <button type="submit">Enviar</button>
+</form>
+{% endblock %}

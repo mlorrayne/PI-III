@@ -1,0 +1,27 @@
+{% extends "core/base.html" %}
+{% block title %}Voluntariados Recebidos{% endblock %}
+{% block content %}
+<h2>Voluntariados Recebidos</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Disponibilidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for v in voluntariados %}
+        <tr>
+            <td>{{ v.nome }}</td>
+            <td>{{ v.telefone }}</td>
+            <td>{{ v.email }}</td>
+            <td>{{ v.disponibilidade }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="4">Nenhum voluntariado cadastrado.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
