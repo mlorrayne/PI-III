@@ -25,5 +25,12 @@ class Transparencia(models.Model):
     meta_doacoes = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
 class Gasto(models.Model):
-    item = models.CharField(max_length=255)
-    valor = models.DecimalField(max_digits=10, decimal_places=2)
+    ITEM_CHOICES = [
+        ("Aluguel", "Aluguel"),
+        ("Cestas Básicas", "Cestas Básicas"),
+        ("Transporte", "Transporte"),
+        ("Eventos", "Eventos"),
+    ]
+    
+    item = models.CharField(max_length=255, choices=ITEM_CHOICES, unique=True)
+    valor = models.DecimalField(max_digits=10, decimal_places=2, default=0)

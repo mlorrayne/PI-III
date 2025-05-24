@@ -101,7 +101,16 @@ def excluir_apoio(request, pk):
 
 def transparencia(request):
     transparencia, created = Transparencia.objects.get_or_create(id=1)
-    relatorio_gastos = Gasto.objects.all()
+    gastos_esperados = ["Aluguel", "Cestas Básicas", "Transporte", "Eventos"]
+    gastos_cadastrados = {gasto.item: gasto for gasto in Gasto.objects.all()}
+    
+    relatorio_gastos = []
+    for item in gastos_esperados:
+        if item not in gastos_cadastrados:
+            novo_gasto = Gasto.objects.create(item=item, valor=0)  # Criar gasto ausente
+            relatorio_gastos.append(novo_gasto)
+        else:
+            relatorio_gastos.append(gastos_cadastrados[item])
 
     return render(request, "core/transparencia.html", {
         "ano_anterior": transparencia.ano_anterior,
@@ -113,7 +122,16 @@ def transparencia(request):
 @login_required
 def editar_transparencia(request):
     transparencia = Transparencia.objects.get(id=1)
-    relatorio_gastos = Gasto.objects.all()
+    gastos_esperados = ["Aluguel", "Cestas Básicas", "Transporte", "Eventos"]
+    gastos_cadastrados = {gasto.item: gasto for gasto in Gasto.objects.all()}
+    
+    relatorio_gastos = []
+    for item in gastos_esperados:
+        if item not in gastos_cadastrados:
+            novo_gasto = Gasto.objects.create(item=item, valor=0)
+            relatorio_gastos.append(novo_gasto)
+        else:
+            relatorio_gastos.append(gastos_cadastrados[item])
 
     if request.method == "POST":
         transparencia.ano_anterior = request.POST.get("ano_anterior")
@@ -122,7 +140,7 @@ def editar_transparencia(request):
         transparencia.save()
 
         for gasto in relatorio_gastos:
-            gasto.valor = request.POST.get(f"gasto_{gasto.id}")
+            gasto.valor = request.POST.get(f"gasto_{gasto.item}", 0)
             gasto.save()
 
         return redirect("transparencia")
