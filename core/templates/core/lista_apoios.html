@@ -1,24 +1,30 @@
 {% extends "core/base.html" %}
-{% block title %}Formulários de Apoio{% endblock %}
+{% block title %}Lista de Apoios | ONG ALMEM{% endblock %}
 {% block content %}
-<h2>Formulários de Apoio</h2>
-<table border="1" cellpadding="8" cellspacing="0">
+<h2>Lista de Apoios</h2>
+
+<table class="custom-table">
     <thead>
         <tr>
             <th>Nome</th>
             <th>Email</th>
             <th>Mensagem</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-        {% for a in apoios %}
+        {% for apoio in apoios %}
         <tr>
-            <td>{{ a.nome }}</td>
-            <td>{{ a.email }}</td>
-            <td>{{ a.mensagem }}</td>
+            <td>{{ apoio.nome }}</td>
+            <td>{{ apoio.email }}</td>
+            <td>{{ apoio.mensagem }}</td>
+            <td>
+                <a href="{% url 'editar_apoio' apoio.pk %}">Editar</a> |
+                <a href="{% url 'excluir_apoio' apoio.pk %}">Excluir</a>
+            </td>
         </tr>
         {% empty %}
-        <tr><td colspan="3">Nenhum formulário de apoio recebido.</td></tr>
+        <tr><td colspan="4">Nenhum apoio registrado.</td></tr>
         {% endfor %}
     </tbody>
 </table>

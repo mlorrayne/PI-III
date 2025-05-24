@@ -31,18 +31,24 @@
                 <li><a href="{% url 'voluntariado' %}" class="{% if request.resolver_match.url_name == 'voluntariado' %}active{% endif %}">Seja Voluntário</a></li>
 
                 {% if request.user.is_staff %}
-                    <li><a href="{% url 'lista_voluntariados' %}" class="{% if request.resolver_match.url_name == 'lista_voluntariados' %}active{% endif %}">Voluntariados</a></li>
-                    <li><a href="{% url 'lista_apoios' %}" class="{% if request.resolver_match.url_name == 'lista_apoios' %}active{% endif %}">Formulários de Apoio</a></li>
+                    <li><a href="{% url 'lista_voluntariados' %}" class="{% if request.resolver_match.url_name == 'lista_voluntariados' %}active{% endif %}">Voluntários</a></li>
+                    <li><a href="{% url 'lista_apoios' %}" class="{% if request.resolver_match.url_name == 'lista_apoios' %}active{% endif %}">Apoiadores</a></li>
+                {% endif %}
+
+                 {% if request.user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" style="background: none; border: none; color:rgb(96, 71, 104); font-weight: bold; cursor: pointer;">
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}" style="color:rgb(96, 71, 104); font-weight: bold;">Login</a></li>
                 {% endif %}
             </ul>
         </nav>
-        <div>
-            {% if request.user.is_authenticated %}
-                <a href="{% url 'logout' %}" style="color: #590b70; font-weight: bold;">Logout</a>
-            {% else %}
-                <a href="{% url 'login' %}" style="color: #590b70; font-weight: bold;">Login</a>
-            {% endif %}
-        </div>
     </header>
 
     <!-- Main -->

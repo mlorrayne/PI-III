@@ -1,26 +1,30 @@
 {% extends "core/base.html" %}
-{% block title %}Voluntariados Recebidos{% endblock %}
+{% block title %}Lista de Voluntários | ONG ALMEM{% endblock %}
 {% block content %}
-<h2>Voluntariados Recebidos</h2>
-<table border="1" cellpadding="8" cellspacing="0">
+<h2>Lista de Voluntários</h2>
+
+<table class="custom-table">
     <thead>
-        <tr>
+         <tr>
             <th>Nome</th>
-            <th>Telefone</th>
             <th>Email</th>
-            <th>Disponibilidade</th>
+            <th>Telefone</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         {% for v in voluntariados %}
         <tr>
             <td>{{ v.nome }}</td>
-            <td>{{ v.telefone }}</td>
             <td>{{ v.email }}</td>
-            <td>{{ v.disponibilidade }}</td>
+            <td>{{ v.telefone }}</td>
+            <td>
+                <a href="{% url 'editar_voluntariado' v.pk %}">Editar</a> |
+                <a href="{% url 'excluir_voluntariado' v.pk %}">Excluir</a>
+            </td>
         </tr>
         {% empty %}
-        <tr><td colspan="4">Nenhum voluntariado cadastrado.</td></tr>
+            <tr><td colspan="4">Nenhum voluntário encontrado.</td></tr>
         {% endfor %}
     </tbody>
 </table>

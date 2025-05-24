@@ -211,6 +211,30 @@ input, select, textarea {
 		margin-bottom: 1em;
 	}
 
+	.custom-table {
+  		width: 100%;
+  		border-collapse: collapse;
+  		margin-top: 1em;
+	}
+
+	.custom-table th, .custom-table td {
+  		border: 1px solid #ccc;
+  		padding: 0.5em 1em;
+  		text-align: left;
+	}
+
+	.custom-table th {
+  		background-color: #f4f4f4;
+	}
+
+	.custom-table tbody tr:nth-child(even) {
+  		background-color: #fafafa;
+	}
+
+	h2 {
+  		margin-bottom: 0.5em;
+	}
+
 	p {
 		text-align: justify;
 	}

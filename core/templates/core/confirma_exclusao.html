@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+{% block title %}Confirmar Exclusão | ONG ALMEM{% endblock %}
+{% block content %}
+<h2>Confirmar Exclusão</h2>
+<p>Tem certeza que deseja excluir este registro de {{ tipo }}?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+    <a href="{% if tipo == 'Apoio' %}{% url 'lista_apoios' %}{% else %}{% url 'lista_voluntariados' %}{% endif %}">Cancelar</a>
+</form>
+{% endblock %}
